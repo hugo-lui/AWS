@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: aws-python-service
+spec:
+  selector:
+    app: aws-python
+  ports:
+  - protocol: "TCP"
+    port: 6000
+    targetPort: 5000
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aws-python
+spec:
+  selector:
+    matchLabels:
+      app: aws-python
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: aws-python
+    spec:
+      containers:
+      - name: aws-python
+        image: aws-python:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
