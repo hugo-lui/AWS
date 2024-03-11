@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: aws-python-service
+  name: aws-service
 spec:
   selector:
-    app: aws-python
+    app: aws
   ports:
   - protocol: "TCP"
     port: 6000
@@ -15,20 +15,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: aws-python
+  name: aws
 spec:
   selector:
     matchLabels:
-      app: aws-python
+      app: aws
   replicas: 4
   template:
     metadata:
       labels:
-        app: aws-python
+        app: aws
     spec:
       containers:
-      - name: aws-python
-        image: aws-python:latest
+      - name: aws
+        image: aws:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 5000
