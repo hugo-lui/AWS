@@ -1,17 +1,8 @@
-resource "google_cloud_run_service" "default" {
-  name = "cloudrun-srv"
-  location = "us-central1"
+resource "aws_instance" "app_server" {
+    ami = "ami-830c94e3"
+    instance_type = "t2.micro"
 
-  template {
-    spec {
-      containers {
-        image = "us-docker.pkg.dev/cloudrun/container/hello"
-      }
+    tags = {
+        Name = var.instance_name
     }
-  }
-
-  traffic {
-    percent         = 100
-    latest_revision = true
-  }
 }
