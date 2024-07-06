@@ -11,4 +11,5 @@ ec2Response = ec2.run_instances(
     MaxCount = 1,
     MinCount = 1,
 )
+
 print(ec2Response)
